@@ -35,35 +35,15 @@ use Illuminate\Http\Request;
 
 
 
-
-
-# Admin access
-Route::view('/','Admin/SuperAdmin/Dashboard');
-Route::view('/user/notification','Admin/SuperAdmin/UserNotification');
-Route::view('/vendor/notification','Admin/SuperAdmin/VendorNotification');
-Route::view('/cities','Admin/SuperAdmin/Cities');
-Route::view('/add/city','Admin/SuperAdmin/AddCity');
-Route::view('/city/admin','Admin/SuperAdmin/CityAdmin');
-Route::view('/add/city/admin','Admin/SuperAdmin/AddCityAdmin');
-Route::view('/banner','Admin/SuperAdmin/BannerList');
-Route::view('/add/banner','Admin/SuperAdmin/AddBanner');
-Route::view('/app/user','Admin/SuperAdmin/AppUsers');
-Route::view('/order/complaints','Admin/SuperAdmin/OrderComplaints');
-Route::view('/order/cancelled','Admin/SuperAdmin/OrderCancelled');
-
-Route::view('/terms','Admin/SuperAdmin/Terms');
-Route::view('/about/us','Admin/SuperAdmin/AboutUs');
-Route::view('/feedback','Admin/SuperAdmin/Feedback');
-
-Route::view('/setting','Admin/SuperAdmin/Setting');
+Route::view('/','Admin/Login');
 
 # Log in [CONTROLLER::login.php]
-Route::post('/login','App\Http\Controllers\admin\login@login_admin');
+Route::post('/admin/login','App\Http\Controllers\admin\login@login_admin');
 
 # Log out.
 Route::get('/logout', function () {
     session()->forget('Admin');
-    return redirect('/admin/login');
+    return redirect('/');
 });
 
 
@@ -77,32 +57,95 @@ Route::group(['middleware'=>['adminAuth']],function() {
 
 
 
-    # Temporary view setup.
-    #Route::view('/admin/home','admin/personalInfo');
-    #Route::view('/admin/project/list','admin/projectList');
-    #Route::view('/admin/project/add','admin/projectAdd');
-    #Route::view('/admin/framework/list','admin/frameworkList');
-    #Route::view('/admin/framework/add','admin/frameworkAdd');
-    #Route::view('/admin/extension/list','admin/extensionList');
-    #Route::view('/admin/extension/add','admin/extensionAdd');
-    #Route::view('/admin/article/list','admin/articleList');
-    #Route::view('/admin/article/add','admin/articleAdd');
-    #Route::view('/admin/video','admin/videos');
-    #Route::view('/admin/education','admin/education');
-    #Route::view('/admin/activity','admin/activity');
-    #Route::view('/article/editor','articleBuilder/articleBuilder');
+    # Admin access
+    Route::view('/dashboard','Admin/SuperAdmin/Dashboard');
+    Route::view('/user/notification','Admin/SuperAdmin/UserNotification');
+    Route::view('/vendor/notification','Admin/SuperAdmin/VendorNotification');
+
+    Route::view('/add/city','Admin/SuperAdmin/AddCity');
+    Route::view('/city/admin','Admin/SuperAdmin/CityAdmin');
+    Route::view('/add/city/admin','Admin/SuperAdmin/AddCityAdmin');
+    
+    Route::view('/add/banner','Admin/SuperAdmin/AddBanner');
+    Route::view('/app/user','Admin/SuperAdmin/AppUsers');
+    Route::view('/order/complaints','Admin/SuperAdmin/OrderComplaints');
+    Route::view('/order/cancelled','Admin/SuperAdmin/OrderCancelled');
+
+    Route::view('/terms','Admin/SuperAdmin/Terms');
+    Route::view('/about/us','Admin/SuperAdmin/AboutUs');
+    Route::view('/feedback','Admin/SuperAdmin/Feedback');
+
+    Route::view('/setting','Admin/SuperAdmin/Setting');
 
     ##############################################################################################################################################
-    # Personal Info.  [C::personalInfo.php]
+    # Dashboard  [C::superAdmin.php]
     ##############################################################################################################################################
 
-    # Reads personal info from db and shows in view.
+    # Shows dashboard.
     # Redirecting to [FUNCTION-NO::01]---in-controller.
-    Route::get('/admin/home','App\Http\Controllers\admin\personalInfo@show_Personal_Info');
+    Route::get('/dashboard/super/admin','App\Http\Controllers\admin\dashboard@super_admin_dashboard');
 
-    # Updates personal info in db.
+    ##############################################################################################################################################
+    # City  [C::superAdmin.php]
+    ##############################################################################################################################################
+
+    # Adding city.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::post('/store/city','App\Http\Controllers\admin\city@insert_city');
+
+    # Viewing add city panel.
+    Route::view('/add/city','Admin/SuperAdmin/AddCity');
+
+    # Shows cities.
     # Redirecting to [FUNCTION-NO::02]---in-controller.
-    Route::post('/edit/profile','App\Http\Controllers\admin\personalInfo@update_Personal_Info');
+    Route::get('/cities','App\Http\Controllers\admin\city@show_city');
+
+    # Take to editing page.
+    # Redirecting to [FUNCTION-NO::03]---in-controller.
+    Route::get('/edit/city/{id}','App\Http\Controllers\admin\city@edit_city');
+
+    # Editing city.
+    # Redirecting to [FUNCTION-NO::04]---in-controller.
+    Route::post('/update/city','App\Http\Controllers\admin\city@update_city');
+
+    # Delete city.
+    # Redirecting to [FUNCTION-NO::05]---in-controller.
+    Route::get('/delete/city/{id}','App\Http\Controllers\admin\city@delete_city');
+
+    ##############################################################################################################################################
+    # Banner  [C::superAdmin.php]
+    ##############################################################################################################################################
+
+    # Adding banner.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::post('/store/banner','App\Http\Controllers\admin\banner@insert_banner');
+
+    # Viewing add banner panel.
+    Route::view('/add/banner','Admin/SuperAdmin/AddBanner');
+
+    # Shows banners.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/banners','App\Http\Controllers\admin\banner@show_banner');
+
+    # Take to editing page.
+    # Redirecting to [FUNCTION-NO::03]---in-controller.
+    Route::get('/edit/banner/{id}','App\Http\Controllers\admin\banner@edit_banner');
+
+    # Editing banner.
+    # Redirecting to [FUNCTION-NO::04]---in-controller.
+    Route::post('/update/banner','App\Http\Controllers\admin\banner@update_banner');
+
+    # Delete banner.
+    # Redirecting to [FUNCTION-NO::05]---in-controller.
+    Route::get('/delete/banner/{id}','App\Http\Controllers\admin\banner@delete_banner'); 
+
+
+
+
+
+
+
+
 
     # Uploading CV.
     # Redirecting to [FUNCTION-NO::03]---in-controller.

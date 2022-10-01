@@ -28,19 +28,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $serial = 1; ?>
+                                        @foreach($data as $list)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>John</td>
-                                            <td>Doe</td>
+                                            <th scope="row"><?php echo $serial; $serial++; ?></th>
+                                            <td>{{$list->city_name}}</td>
+                                            <td><img src="{{asset('City/'.$list->city_image)}}" alt="loading error..." width="30px"></td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-sm-square btn-outline-danger">
+                                                <a href="{{url('/delete/city/'.$list->city_id)}}" class="btn btn-sm btn-sm-square btn-outline-danger">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                <a href="" class="btn btn-sm btn-sm-square btn-outline-warning">
+                                                <a href="{{url('/edit/city/'.$list->city_id)}}" class="btn btn-sm btn-sm-square btn-outline-warning">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class login extends Controller
 {
-    
-    
+
+
 
 
 
@@ -22,56 +22,41 @@ class login extends Controller
 
         # Auth start from here.
         $password=$request->input('password');
-        $panel=$request->input('panel');
-        $result=DB::table('admins')->where('Ad_AI_ID','1')->where('Password',$password)->get();
+        $phone=$request->input('phone');
+        $result=DB::table('admin')->where('admin_number',$phone)->where('password',$password)->get();
 
-        if(isset($result[0]->Ad_AI_ID)){
+        if(isset($result[0]->admin_id)){
+
+            $admin_type=$result[0]->admin_type;
 
             $request->session()->put('Admin','Active');
+            $request->session()->put('Admin_Type',$admin_type);
 
-            if($panel=="admin"){
+            # Update activity log.
+            $msg = $result[0]->admin_name.' logged in successfully to admin panel.';
+            $entry=array(
+                'log'=>$msg
+            );
 
-                # Update activity log.
-                $msg = 'Login successful to admin panel.';
-                $entry=array(
-                    'Logs'=>$msg
-                );
+            DB::table('activity_log')->insert($entry);
 
-                DB::table('activity_logs')->insert($entry);
+            $request->session()->put('msgHook','green');
+            $request->session()->flash('msg','Admin panel successfully accessed.');
 
-                $request->session()->put('msgHook','green');
-                $request->session()->flash('msg','Admin panel successfully accessed.');
-
-                return redirect('/admin/home');
-
-            }else{
-
-                # Update activity log.
-                $msg = 'Login successful to article editor.';
-                $entry=array(
-                    'Logs'=>$msg
-                );
-
-                DB::table('activity_logs')->insert($entry);
-
-                $request->session()->put('msgHook','green');
-                $request->session()->flash('msg','Article editor successfully accessed.');
-
-                return redirect('/article/editor/');
-
-            }
+            return redirect('/dashboard/super/admin');
 
         }else{
 
             # Update activity log.
-            $msg = 'Failed attempt to login.';
+            $msg = $result[0]->admin_name.' failed to login.';
             $entry=array(
-                'Logs'=>$msg
+                'log'=>$msg
             );
 
-            DB::table('activity_logs')->insert($entry);
+            DB::table('activity_log')->insert($entry);
 
             $request->session()->flash('msg','Wrong Password.');
+
             return redirect('/admin/login');
 
         }

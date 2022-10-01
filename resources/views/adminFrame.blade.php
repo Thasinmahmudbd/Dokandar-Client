@@ -74,7 +74,7 @@
 
                     <a href="{{url('/city/admin')}}" class="nav-item nav-link"><i class="fas fa-user-shield me-2"></i>City Admin</a>
 
-                    <a href="{{url('/banner')}}" class="nav-item nav-link"><i class="fas fa-sticky-note me-2"></i>Banner</a>
+                    <a href="{{url('/banners')}}" class="nav-item nav-link"><i class="fas fa-sticky-note me-2"></i>Banner</a>
 
                     <a href="{{url('/app/user')}}" class="nav-item nav-link"><i class="fas fa-user me-2"></i>App Users</a>
 
@@ -133,8 +133,8 @@
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="{{url('/setting')}}" class="dropdown-item">Settings</a>
+                            <a href="{{url('/logout')}}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
 
@@ -146,36 +146,34 @@
 
 
 
+            <!--Session message-->
+
+            @if(session('msgHook')=='green' && session()->has('msg'))
+            <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i> {{session('msg')}} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            @elseif(session('msgHook')=='red' && session()->has('msg'))
+            <div class="alert alert-danger alert-dismissible fade show m-4" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i> {{session('msg')}} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            @elseif(session('msgHook')=='yellow' && session()->has('msg'))
+            <div class="alert alert-warning alert-dismissible fade show m-4" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i> {{session('msg')}} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            @endif
+
 
 
 
 <!-- container -->
 @section('container')
 @show
-
-
-
-
-
-
-            <!--Session message-->
-
-            @if(session('msgHook')=='green' && session()->has('msg'))
-
-            <p class="highlightSuccess w_100Per txtCenter"> {{session('msg')}} </p>
-
-            @elseif(session('msgHook')=='yellow' && session()->has('msg'))
-
-            <p class="highlightAlert w_100Per txtCenter"> {{session('msg')}} </p>
-
-            @elseif(session('msgHook')=='red' && session()->has('msg'))
-
-            <p class="highlightDanger w_100Per txtCenter"> {{session('msg')}} </p>
-
-            @endif
-
-
-
 
 
 
