@@ -63,22 +63,16 @@ Route::group(['middleware'=>['adminAuth']],function() {
     Route::view('/vendor/notification','Admin/SuperAdmin/VendorNotification');
 
     Route::view('/add/city','Admin/SuperAdmin/AddCity');
-    Route::view('/city/admin','Admin/SuperAdmin/CityAdmin');
-    Route::view('/add/city/admin','Admin/SuperAdmin/AddCityAdmin');
     
     Route::view('/add/banner','Admin/SuperAdmin/AddBanner');
     Route::view('/app/user','Admin/SuperAdmin/AppUsers');
     Route::view('/order/complaints','Admin/SuperAdmin/OrderComplaints');
     Route::view('/order/cancelled','Admin/SuperAdmin/OrderCancelled');
 
-    Route::view('/terms','Admin/SuperAdmin/Terms');
-    Route::view('/about/us','Admin/SuperAdmin/AboutUs');
     Route::view('/feedback','Admin/SuperAdmin/Feedback');
 
-    Route::view('/setting','Admin/SuperAdmin/Setting');
-
     ##############################################################################################################################################
-    # Dashboard  [C::superAdmin.php]
+    # Dashboard  [C::dashboard.php]
     ##############################################################################################################################################
 
     # Shows dashboard.
@@ -86,7 +80,7 @@ Route::group(['middleware'=>['adminAuth']],function() {
     Route::get('/dashboard/super/admin','App\Http\Controllers\admin\dashboard@super_admin_dashboard');
 
     ##############################################################################################################################################
-    # City  [C::superAdmin.php]
+    # City  [C::city.php]
     ##############################################################################################################################################
 
     # Adding city.
@@ -113,7 +107,7 @@ Route::group(['middleware'=>['adminAuth']],function() {
     Route::get('/delete/city/{id}','App\Http\Controllers\admin\city@delete_city');
 
     ##############################################################################################################################################
-    # Banner  [C::superAdmin.php]
+    # Banner  [C::banner.php]
     ##############################################################################################################################################
 
     # Adding banner.
@@ -138,6 +132,65 @@ Route::group(['middleware'=>['adminAuth']],function() {
     # Delete banner.
     # Redirecting to [FUNCTION-NO::05]---in-controller.
     Route::get('/delete/banner/{id}','App\Http\Controllers\admin\banner@delete_banner'); 
+
+    ##############################################################################################################################################
+    # Setting  [C::setting.php]
+    ##############################################################################################################################################
+
+    # Shows setting.
+    Route::view('/setting','Admin/SuperAdmin/Setting');
+
+    # Updating admin info.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::post('/update/admin/info','App\Http\Controllers\admin\setting@update_admin');
+
+    ##############################################################################################################################################
+    # Policy  [C::policy.php]
+    ##############################################################################################################################################
+
+    # Shows terms.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::get('/terms','App\Http\Controllers\admin\policy@show_terms');
+
+    # Shows about.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/about','App\Http\Controllers\admin\policy@show_about');
+
+    # Update policy.
+    # Redirecting to [FUNCTION-NO::03]---in-controller.
+    Route::post('/update/policy','App\Http\Controllers\admin\policy@update_policy');
+
+    ##############################################################################################################################################
+    # City admin  [C::policy.php]
+    ##############################################################################################################################################
+
+    # Shows city admin form.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::get('/city/admin/form','App\Http\Controllers\admin\cityAdmin@city_admin_form');
+
+    # Adds city admin.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::post('/add/city/admin','App\Http\Controllers\admin\cityAdmin@add_city_admin');
+
+    # Shows city admin list.
+    # Redirecting to [FUNCTION-NO::03]---in-controller.
+    Route::get('/city/admin','App\Http\Controllers\admin\cityAdmin@city_admin_list');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

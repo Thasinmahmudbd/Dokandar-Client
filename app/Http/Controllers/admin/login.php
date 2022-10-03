@@ -28,12 +28,18 @@ class login extends Controller
         if(isset($result[0]->admin_id)){
 
             $admin_type=$result[0]->admin_type;
+            $admin_name=$result[0]->admin_name;
 
             $request->session()->put('Admin','Active');
+            $request->session()->put('Admin_Name',$admin_name);
+            $request->session()->put('Admin_Email',$result[0]->admin_email);
+            $request->session()->put('Admin_Phone',$result[0]->admin_number);
+            $request->session()->put('Admin_ID',$result[0]->admin_id);
+            $request->session()->put('Admin_Image',$result[0]->admin_image);
             $request->session()->put('Admin_Type',$admin_type);
 
             # Update activity log.
-            $msg = $result[0]->admin_name.' logged in successfully to admin panel.';
+            $msg = $admin_name.' logged in successfully to admin panel.';
             $entry=array(
                 'log'=>$msg
             );
@@ -48,7 +54,7 @@ class login extends Controller
         }else{
 
             # Update activity log.
-            $msg = $result[0]->admin_name.' failed to login.';
+            $msg = $admin_name.' failed to login.';
             $entry=array(
                 'log'=>$msg
             );

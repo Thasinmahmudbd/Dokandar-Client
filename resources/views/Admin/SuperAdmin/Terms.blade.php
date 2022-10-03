@@ -12,11 +12,16 @@
 
                             <h6 class="mb-4">Terms & Conditions</h6>
 
-                            <form>
+                            <form action="{{url('/update/policy')}}" method="post">
+                            @csrf
 
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here"
-                                        id="floatingTextarea" style="height: 150px;"></textarea>
+                                        id="floatingTextarea" style="height: 150px;" name="term">{{session('policy')}}</textarea>
+
+                                    <input type="hidden" class="form-control" id="floatingInput"
+                                        value="term" name="type">
+
                                     <label for="floatingTextarea">Message</label>
                                 </div>
 

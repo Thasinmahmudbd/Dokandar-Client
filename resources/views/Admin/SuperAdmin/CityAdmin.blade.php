@@ -13,7 +13,7 @@
                             <div class="row justify-content-between">
                                 <h6 class="mb-4 col-4">City Admin</h6>
                                 <div class="col-1">
-                                    <a href="{{url('/add/city/admin')}}" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="{{url('/city/admin/form')}}" class="btn btn-sm btn-primary">Add</a>
                                 </div>
                             </div>
 
@@ -32,28 +32,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $serial = 1; ?>
+                                        @foreach($data as $list)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td>John</td>
+                                            <th scope="row"><?php echo $serial; $serial++; ?></th>
+                                            <td>{{$list->city_name}}</td>
+                                            <td>{{$list->admin_name}}</td>
+                                            <td>{{$list->admin_number}}</td>
+                                            <td>{{$list->admin_email}}</td>
+                                            <td><img src="{{asset('Admin/'.$list->admin_image)}}" alt="loading error..." width="30px"></td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-primary">Stores</a>
+                                                <a href="{{url('/stores/under/city/admin/'.$list->admin_id)}}" class="btn btn-sm btn-primary">Stores</a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-sm-square btn-outline-dark">
+                                                <a href="{{url('/login/city/admin/'.$list->admin_id)}}" class="btn btn-sm btn-sm-square btn-outline-dark">
                                                     <i class="fas fa-user-secret"></i>
                                                 </a>
-                                                <a href="" class="btn btn-sm btn-sm-square btn-outline-danger">
+                                                <a href="{{url('/delete/city/admin/'.$list->admin_id)}}" class="btn btn-sm btn-sm-square btn-outline-danger">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                <a href="" class="btn btn-sm btn-sm-square btn-outline-warning">
+                                                <a href="{{url('/edit/city/admin/'.$list->admin_id)}}" class="btn btn-sm btn-sm-square btn-outline-warning">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
