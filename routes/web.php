@@ -42,7 +42,10 @@ Route::post('/admin/login','App\Http\Controllers\admin\login@login_admin');
 
 # Log out.
 Route::get('/logout', function () {
-    session()->forget('Admin');
+    session()->forget('super');
+    session()->forget('city');
+    session()->forget('vendorz');
+
     return redirect('/');
 });
 
@@ -52,15 +55,14 @@ Route::get('/logout', function () {
 
 
 
-# Admin functionality [CONTROLLER::personalInfo.php, projects.php], [MIDDLEWARE::AdminAuth.php].
-Route::group(['middleware'=>['adminAuth']],function() {
+# Super Admin functionality [CONTROLLER::various], [MIDDLEWARE::superAuth.php].
+Route::group(['middleware'=>['AdminAuth']],function() {
 
 
 
-    # Admin access
-    Route::view('/dashboard','Admin/SuperAdmin/Dashboard');
-    Route::view('/user/notification','Admin/SuperAdmin/UserNotification');
-    Route::view('/vendor/notification','Admin/SuperAdmin/VendorNotification');
+    # Super admin access
+    Route::view('super/user/notification','Admin/SuperAdmin/UserNotification');
+    Route::view('super/vendor/notification','Admin/SuperAdmin/VendorNotification');
 
     Route::view('/add/city','Admin/SuperAdmin/AddCity');
     
@@ -75,7 +77,7 @@ Route::group(['middleware'=>['adminAuth']],function() {
     # Dashboard  [C::dashboard.php]
     ##############################################################################################################################################
 
-    # Shows dashboard.
+    # Shows super admin dashboard.
     # Redirecting to [FUNCTION-NO::01]---in-controller.
     Route::get('/dashboard/super/admin','App\Http\Controllers\admin\dashboard@super_admin_dashboard');
 
@@ -161,7 +163,7 @@ Route::group(['middleware'=>['adminAuth']],function() {
     Route::post('/update/policy','App\Http\Controllers\admin\policy@update_policy');
 
     ##############################################################################################################################################
-    # City admin  [C::policy.php]
+    # City admin  [C::cityAdmin.php]
     ##############################################################################################################################################
 
     # Shows city admin form.
@@ -175,6 +177,8 @@ Route::group(['middleware'=>['adminAuth']],function() {
     # Shows city admin list.
     # Redirecting to [FUNCTION-NO::03]---in-controller.
     Route::get('/city/admin','App\Http\Controllers\admin\cityAdmin@city_admin_list');
+
+
 
 
 
@@ -457,6 +461,123 @@ Route::group(['middleware'=>['adminAuth']],function() {
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# City Admin functionality [CONTROLLER::various], [MIDDLEWARE::cityAuth.php].
+Route::group(['middleware'=>['CityAuth']],function() {
+
+
+
+
+    # Super admin access
+    Route::view('city/user/notification','Admin/CityAdmin/UserNotification');
+    Route::view('city/vendor/notification','Admin/CityAdmin/VendorNotification');
+
+    ##############################################################################################################################################
+    # Dashboard  [C::dashboard.php]
+    ##############################################################################################################################################
+
+    # Shows city admin dashboard.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/dashboard/city/admin','App\Http\Controllers\admin\dashboard@city_admin_dashboard');
+
+    ##############################################################################################################################################
+    # Delivery boy  [C::delivery.php]
+    ##############################################################################################################################################
+
+    # Shows delivery boy list.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::get('/delivery/boy/list','App\Http\Controllers\admin\delivery@show_delivery_boy_list');
+
+    # Shows delivery boy add form.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/delivery/boy/form','App\Http\Controllers\admin\delivery@show_delivery_boy_form');
+
+    # Shows delivery boy add form.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::post('/add/delivery/boy','App\Http\Controllers\admin\delivery@add_delivery_boy');
+
+    ##############################################################################################################################################
+    # Area  [C::area.php]
+    ##############################################################################################################################################
+
+    # Shows area.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::get('/area','App\Http\Controllers\admin\area@show_area');
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+# City Admin functionality [CONTROLLER::various], [MIDDLEWARE::cityAuth.php].
+Route::group(['middleware'=>['VendorAuth']],function() {
+
+
+
+
+    # Super admin access
+    
+
+    ##############################################################################################################################################
+    # Dashboard  [C::dashboard.php]
+    ##############################################################################################################################################
+
+    # Shows vendor admin dashboard.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/dashboard/vendor/admin','App\Http\Controllers\admin\dashboard@vendor_admin_dashboard');
+
+
+
+
+});
+
+
+
+
+
+
+
+
 
 
 

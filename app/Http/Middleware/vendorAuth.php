@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class adminAuth
+class vendorAuth
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,10 @@ class adminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if(!$request->session()->has('super')){
+        if(!$request->session()->has('vendor')){
             return redirect('/');
         }
 
         return $next($request);
-
     }
 }

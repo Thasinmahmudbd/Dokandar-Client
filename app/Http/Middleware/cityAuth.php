@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class adminAuth
+class cityAuth
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class adminAuth
     public function handle(Request $request, Closure $next)
     {
 
-        if(!$request->session()->has('super')){
+        if(!$request->session()->has('city')){
             return redirect('/');
         }
 

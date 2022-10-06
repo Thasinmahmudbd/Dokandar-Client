@@ -35,4 +35,48 @@ class dashboard extends Controller
 
 
 
+    #########################
+    #### FUNCTION-NO::02 ####
+    #########################
+    # Show city admin dashboard;
+
+    function city_admin_dashboard(Request $request){
+
+        return view('Admin/CityAdmin/Dashboard');
+
+    }
+
+    # End of function city_admin_dashboard.                     <-------#
+                                                                        #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Note: Hello, future me, nothing done.
+    # 
+    # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+
+
+    #########################
+    #### FUNCTION-NO::03 ####
+    #########################
+    # Show vendor admin dashboard;
+
+    function vendor_admin_dashboard(Request $request){
+
+        return view('Admin/VendorAdmin/Dashboard');
+
+    }
+
+    # End of function vendor_admin_dashboard.                   <-------#
+                                                                        #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Note: Hello, future me, nothing done.
+    # 
+    # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
 }

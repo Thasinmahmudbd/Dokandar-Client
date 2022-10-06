@@ -30,7 +30,6 @@ class login extends Controller
             $admin_type=$result[0]->admin_type;
             $admin_name=$result[0]->admin_name;
 
-            $request->session()->put('Admin','Active');
             $request->session()->put('Admin_Name',$admin_name);
             $request->session()->put('Admin_Email',$result[0]->admin_email);
             $request->session()->put('Admin_Phone',$result[0]->admin_number);
@@ -38,8 +37,23 @@ class login extends Controller
             $request->session()->put('Admin_Image',$result[0]->admin_image);
             $request->session()->put('Admin_Type',$admin_type);
 
+            $request->session()->put($admin_type,'Active');
+
             # Update activity log.
-            $msg = $admin_name.' logged in successfully to admin panel.';
+
+            if($admin_type == 'super'){
+
+                $msg = 'Super admin '.$admin_name.' logged in successfully to admin panel.';
+
+            }if($admin_type == 'city'){
+
+                $msg = 'City admin '.$admin_name.' logged in successfully to admin panel.';
+
+            }if($admin_type == 'vendor'){
+
+                $msg = 'Vendor '.$admin_name.' logged in successfully to admin panel.';
+            }
+
             $entry=array(
                 'log'=>$msg
             );
@@ -49,12 +63,18 @@ class login extends Controller
             $request->session()->put('msgHook','green');
             $request->session()->flash('msg','Admin panel successfully accessed.');
 
-            return redirect('/dashboard/super/admin');
+            if($admin_type == 'super'){
+                return redirect('/dashboard/super/admin');
+            }if($admin_type == 'city'){
+                return redirect('/dashboard/city/admin');
+            }else{
+                return redirect('/dashboard/vendor/admin');
+            }
 
         }else{
 
             # Update activity log.
-            $msg = $admin_name.' failed to login.';
+            $msg = 'Failed to login.';
             $entry=array(
                 'log'=>$msg
             );
@@ -63,7 +83,7 @@ class login extends Controller
 
             $request->session()->flash('msg','Wrong Password.');
 
-            return redirect('/admin/login');
+            return redirect('/');
 
         }
 

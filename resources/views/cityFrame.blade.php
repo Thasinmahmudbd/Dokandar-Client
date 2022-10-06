@@ -45,7 +45,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="{{url('/dashboard/super/admin')}}" class="navbar-brand mx-4 mb-3">
+                <a href="{{url('/dashboard/city/admin')}}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DOKANDAR</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -60,53 +60,26 @@
                 </div>
                 <div class="navbar-nav w-100">
 
-                    <a href="{{url('/dashboard/super/admin')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{url('/dashboard/city/admin')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bell me-2"></i>Notification</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{url('super/user/notification')}}" class="dropdown-item">To Users</a>
-                            <a href="{{url('super/vendor/notification')}}" class="dropdown-item">To Vendors</a>
-                        </div>
-                    </div>
-
-                    <a href="{{url('/cities')}}" class="nav-item nav-link"><i class="fas fa-map-marker-alt me-2"></i>Cities</a>
-
-                    <a href="{{url('/city/admin')}}" class="nav-item nav-link"><i class="fas fa-user-shield me-2"></i>City Admin</a>
-
-                    <a href="{{url('/banners')}}" class="nav-item nav-link"><i class="fas fa-sticky-note me-2"></i>Banner</a>
-
-                    <a href="{{url('/app/user')}}" class="nav-item nav-link"><i class="fas fa-user me-2"></i>App Users</a>
-
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-box me-2"></i>Order</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{url('/order/complaints')}}" class="dropdown-item">Complaints</a>
-                            <a href="{{url('/order/cancelled')}}" class="dropdown-item">Cancelled</a>
+                            <a href="{{url('city/user/notification')}}" class="dropdown-item">To Users</a>
+                            <a href="{{url('city/vendor/notification')}}" class="dropdown-item">To Vendors</a>
                         </div>
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-coins me-2"></i>Commissions</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bell me-2"></i>Delivery</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{url('')}}" class="dropdown-item">Rewards</a>
-                            <a href="{{url('')}}" class="dropdown-item">Redeem Points</a>
-                            <a href="{{url('')}}" class="dropdown-item">App Refers</a>
-                            <a href="{{url('')}}" class="dropdown-item">Commissions</a>
+                            <a href="{{url('/delivery/boy/list')}}" class="dropdown-item">Delivery Boy</a>
+                            <a href="{{url('/delivery/boy/commission')}}" class="dropdown-item">Delivery Boy Commission</a>
+                            <a href="{{url('/area')}}" class="dropdown-item">Area</a>
                         </div>
                     </div>
 
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-asterisk me-2"></i>Policy</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{url('/terms')}}" class="dropdown-item">Terms & Conditions</a>
-                            <a href="{{url('/about')}}" class="dropdown-item">About Us</a>
-                        </div>
-                    </div>
-
-                    <a href="{{url('/feedback')}}" class="nav-item nav-link"><i class="fas fa-comments me-2"></i>Feedbacks</a>
-
-                    <a href="{{url('/setting')}}" class="nav-item nav-link"><i class="fas fa-cogs me-2"></i>Settings</a>
+                    <a href="{{url('/vendors')}}" class="nav-item nav-link"><i class="fas fa-map-marker-alt me-2"></i>Vendors</a>
 
                 </div>
             </nav>
@@ -133,7 +106,6 @@
                             <span class="d-none d-lg-inline-flex">{{session('Admin_Name')}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{url('/setting')}}" class="dropdown-item">Settings</a>
                             <a href="{{url('/logout')}}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
