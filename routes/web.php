@@ -44,7 +44,7 @@ Route::post('/admin/login','App\Http\Controllers\admin\login@login_admin');
 Route::get('/logout', function () {
     session()->forget('super');
     session()->forget('city');
-    session()->forget('vendorz');
+    session()->forget('vendor');
 
     return redirect('/');
 });
@@ -521,8 +521,12 @@ Route::group(['middleware'=>['CityAuth']],function() {
     Route::get('/delivery/boy/form','App\Http\Controllers\admin\delivery@show_delivery_boy_form');
 
     # Shows delivery boy add form.
-    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    # Redirecting to [FUNCTION-NO::03]---in-controller.
     Route::post('/add/delivery/boy','App\Http\Controllers\admin\delivery@add_delivery_boy');
+
+    # Shows delivery commission list.
+    # Redirecting to [FUNCTION-NO::04]---in-controller.
+    Route::get('/delivery/boy/commission/list','App\Http\Controllers\admin\delivery@show_delivery_commission_list');
 
     ##############################################################################################################################################
     # Area  [C::area.php]
@@ -531,6 +535,28 @@ Route::group(['middleware'=>['CityAuth']],function() {
     # Shows area.
     # Redirecting to [FUNCTION-NO::01]---in-controller.
     Route::get('/area','App\Http\Controllers\admin\area@show_area');
+
+    # Shows area form.
+    Route::view('/area/from','Admin/CityAdmin/AddArea');
+
+    # Adds area.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::post('/add/area','App\Http\Controllers\admin\area@add_area');
+
+    ##############################################################################################################################################
+    # Vendor  [C::vendorAdmin.php]
+    ##############################################################################################################################################
+
+    # Shows city admin form.
+    Route::view('/vendor/admin/form','Admin/CityAdmin/AddVendorAdmin');
+
+    # Adds city admin.
+    # Redirecting to [FUNCTION-NO::01]---in-controller.
+    Route::post('/add/vendor/admin','App\Http\Controllers\admin\vendorAdmin@add_vendor_admin');
+
+    # Shows city admin list.
+    # Redirecting to [FUNCTION-NO::02]---in-controller.
+    Route::get('/vendor/admin','App\Http\Controllers\admin\vendorAdmin@vendor_admin_list');
 
 
 

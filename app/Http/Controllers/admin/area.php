@@ -42,7 +42,7 @@ class area extends Controller
 
 
     #########################
-    #### FUNCTION-NO::02 ####
+    #### FUNCTION-NO::01 ####
     #########################
     # Read area;
 
@@ -64,4 +64,49 @@ class area extends Controller
     # 
     # 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+
+    #########################
+    #### FUNCTION-NO::02 ####
+    #########################
+    # Add area;
+
+    function add_area(Request $request){
+
+        $area = $request->input('area');
+        $delivery_charge = $request->input('delivery_charge');
+
+        $entry=array(
+            'area_name'=>$area,
+            'delivery_charge'=>$delivery_charge
+        );
+
+        DB::table('area')
+            ->insert($entry);
+
+        $log=array(
+            'log'=>'Area '.$area.' added'
+        );
+
+        DB::table('activity_log')
+            ->insert($log);
+
+        $request->session()->put('msgHook','green');
+        $request->session()->flash('msg','Area added');
+
+        #redirecting to area form.
+        return redirect('/area/from');
+
+    }
+
+    # End of function add_area.                                 <-------#
+                                                                        #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Note: Hello, future me,
+    # 
+    # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 }

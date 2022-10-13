@@ -29,7 +29,7 @@
                                     <select class="form-select" id="floatingSelect"
                                         aria-label="Floating label select example" name="vendor" required>
                                         @foreach($vendor as $list)
-                                        <option value="{{$list->vendor_name}}">{{$list->vendor_name}}</option>
+                                        <option value="{{$list->admin_name}}">{{$list->admin_name}}</option>
                                         @endforeach
                                     </select>
                                     <label for="floatingSelect">Vendor</label>

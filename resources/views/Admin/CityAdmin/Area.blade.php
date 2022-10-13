@@ -16,7 +16,7 @@
                             <div class="row justify-content-between">
                                 <h6 class="mb-4 col-4">Area</h6>
                                 <div class="col-1">
-                                    <a href="{{url('/add/area')}}" class="btn btn-sm btn-primary">Add</a>
+                                    <a href="{{url('/area/from')}}" class="btn btn-sm btn-primary">Add</a>
                                 </div>
                             </div>
 

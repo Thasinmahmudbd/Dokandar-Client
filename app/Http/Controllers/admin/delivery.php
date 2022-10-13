@@ -78,8 +78,9 @@ class delivery extends Controller
             ->orderBy('area_name','asc')
             ->get();
 
-        $result2['vendor'] = DB::table('vendor')
-            ->orderBy('vendor_name','asc')
+        $result2['vendor'] = DB::table('admin')
+            ->where('admin_type','vendor')
+            ->orderBy('admin_name','asc')
             ->get();
 
         return view('Admin/CityAdmin/AddDeliveryBoy', $result, $result2);
@@ -165,6 +166,32 @@ class delivery extends Controller
     }
 
     # End of function add_city_admin.                           <-------#
+                                                                        #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Note: Hello, future me,
+    # 
+    # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+
+    #########################
+    #### FUNCTION-NO::04 ####
+    #########################
+    # Show delivery commission;
+
+    function show_delivery_commission_list(Request $request){
+
+        $result['data'] = DB::table('delivery_boy')
+            ->orderBy('delivery_name','asc')
+            ->get();
+
+        return view('Admin/CityAdmin/DeliveryBoyCommission', $result);
+
+    }
+
+    # End of function show_delivery_commission_list.            <-------#
                                                                         #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Note: Hello, future me,

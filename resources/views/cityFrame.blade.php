@@ -74,12 +74,12 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bell me-2"></i>Delivery</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{url('/delivery/boy/list')}}" class="dropdown-item">Delivery Boy</a>
-                            <a href="{{url('/delivery/boy/commission')}}" class="dropdown-item">Delivery Boy Commission</a>
+                            <a href="{{url('/delivery/boy/commission/list')}}" class="dropdown-item">Delivery Boy Commission</a>
                             <a href="{{url('/area')}}" class="dropdown-item">Area</a>
                         </div>
                     </div>
 
-                    <a href="{{url('/vendors')}}" class="nav-item nav-link"><i class="fas fa-map-marker-alt me-2"></i>Vendors</a>
+                    <a href="{{url('/vendor/admin')}}" class="nav-item nav-link"><i class="fas fa-map-marker-alt me-2"></i>Vendors</a>
 
                 </div>
             </nav>
@@ -140,7 +140,9 @@
 
             @endif
 
-
+<!-- <p>Super ---- {{session('super')}}</p>
+<p>City ----- {{session('city')}}</p>
+<p>Vendor --- {{session('vendor')}}</p> -->
 
 
 <!-- container -->

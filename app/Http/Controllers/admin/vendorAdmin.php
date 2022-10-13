@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class cityAdmin extends Controller
+class vendorAdmin extends Controller
 {
 
 
@@ -46,40 +46,20 @@ class cityAdmin extends Controller
     #########################
     # Show form;
 
-    function city_admin_form(Request $request){
+    function add_vendor_admin(Request $request){
 
-        $result['data'] = DB::table('city')
-            ->orderBy('city_name','asc')
-            ->get();
-
-        return view('Admin/SuperAdmin/AddCityAdmin', $result);
-
-    }
-
-    # End of function city_admin_form.                          <-------#
-                                                                        #
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # Note: Hello, future me,
-    # 
-    # 
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-
-
-    #########################
-    #### FUNCTION-NO::02 ####
-    #########################
-    # Show form;
-
-    function add_city_admin(Request $request){
-
-        \App::call('App\Http\Controllers\admin\cityAdmin@timeDateDay');
+        \App::call('App\Http\Controllers\admin\vendorAdmin@timeDateDay');
 
         $name = $request->input('name');
+        $owner_name = $request->input('owner_name');
         $email = $request->input('email');
         $phone = $request->input('phone');
         $address = $request->input('address');
-        $city = $request->input('city');
+        $vendor_category = $request->input('vendor_category');
+        $opening = $request->input('opening');
+        $closing = $request->input('closing');
+        $commission = $request->input('commission');
+        $delivery_range = $request->input('delivery_range');
         $password = $request->input('password');
         $confirm_password = $request->input('confirm_password');
         $time = $request->session()->get('TIME_TODAY');
@@ -88,11 +68,16 @@ class cityAdmin extends Controller
 
             $entry=array(
                 'admin_name'=>$name,
+                'owner_name'=>$owner_name,
                 'admin_email'=>$email,
                 'admin_number'=>$phone,
                 'admin_address'=>$address,
-                'admin_type'=>'city',
-                'city_name'=>$city,
+                'admin_type'=>'vendor',
+                'open_time'=>$opening,
+                'close_time'=>$closing,
+                'commission_per_order'=>$commission,
+                'delivery_range'=>$delivery_range,
+                'vendor_category'=>$vendor_category,
                 'password'=>$password,
             );
 
@@ -113,14 +98,14 @@ class cityAdmin extends Controller
                 ->insert($entry);
 
             $log=array(
-                'log'=>'City admin '.$name.' added'
+                'log'=>'Vendor '.$name.' added'
             );
 
             DB::table('activity_log')
                 ->insert($log);
 
             $request->session()->put('msgHook','green');
-            $request->session()->flash('msg','City admin added');
+            $request->session()->flash('msg','Vendor admin added');
 
         }else{
 
@@ -130,11 +115,11 @@ class cityAdmin extends Controller
         }
 
         #redirecting to function::01 this controller.
-        return redirect('/city/admin/form');
+        return redirect('/vendor/admin/form');
 
     }
 
-    # End of function add_city_admin.                           <-------#
+    # End of function add_vendor_admin.                         <-------#
                                                                         #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Note: Hello, future me,
@@ -145,21 +130,21 @@ class cityAdmin extends Controller
 
 
     #########################
-    #### FUNCTION-NO::03 ####
+    #### FUNCTION-NO::02 ####
     #########################
     # Show form;
 
-    function city_admin_list(Request $request){
+    function vendor_admin_list(Request $request){
 
         $result['data'] = DB::table('admin')
-            ->where('admin_type','city')
+            ->where('admin_type','vendor')
             ->get();
 
-        return view('Admin/SuperAdmin/CityAdmin', $result);
+        return view('Admin/CityAdmin/VendorList', $result);
 
     }
 
-    # End of function city_admin_list.                          <-------#
+    # End of function vendor_admin_list.                        <-------#
                                                                         #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Note: Hello, future me,

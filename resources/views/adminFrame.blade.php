@@ -168,7 +168,9 @@
 
             @endif
 
-
+<!-- <p>Super ---- {{session('super')}}</p>
+<p>City ----- {{session('city')}}</p>
+<p>Vendor --- {{session('vendor')}}</p> -->
 
 
 <!-- container -->

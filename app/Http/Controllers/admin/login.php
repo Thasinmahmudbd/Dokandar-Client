@@ -37,6 +37,10 @@ class login extends Controller
             $request->session()->put('Admin_Image',$result[0]->admin_image);
             $request->session()->put('Admin_Type',$admin_type);
 
+            $request->session()->forget('super');
+            $request->session()->forget('city');
+            $request->session()->forget('vendor');
+
             $request->session()->put($admin_type,'Active');
 
             # Update activity log.
